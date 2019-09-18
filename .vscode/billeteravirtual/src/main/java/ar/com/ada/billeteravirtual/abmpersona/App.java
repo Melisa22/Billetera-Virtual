@@ -58,7 +58,7 @@ public class App {
 
     }
 
-    public static <Persona> void alta() {
+    public static void alta() {
         Persona p = new Persona();
         System.out.println("Ingrese el nombre:");
         p.setNombre(Teclado.nextLine());
@@ -100,8 +100,8 @@ public class App {
     }
 
     public static void baja() {
-        System.out.println("Ingrese el nombre:");
-        String n = Teclado.nextLine();
+        //System.out.println("Ingrese el nombre:");
+        //String n = Teclado.nextLine();
         System.out.println("Ingrese el ID de Persona:");
         int id = Teclado.nextInt();
         Teclado.nextLine();
@@ -117,8 +117,8 @@ public class App {
     }
 
     public static void bajaPorDNI() {
-        System.out.println("Ingrese el nombre:");
-        String n = Teclado.nextLine();
+        //System.out.println("Ingrese el nombre:");
+        //String n = Teclado.nextLine();
         System.out.println("Ingrese el DNI de Persona:");
         String dni = Teclado.nextLine();
         Persona personaEncontrada = ABMPersona.readByDNI(dni);

@@ -1,9 +1,6 @@
-package main.java.ar.com.ada.billeteravirtual.abmpersona;
+package ar.com.ada.billeteravirtual.abmpersona;
 
-import java.util.List;
 import java.util.logging.Level;
-
-import javax.persistence.Query;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -46,15 +43,7 @@ public class BilleteraManager {
         session.close();
     }
 
-    public Billetera read(int BilleteraId) {
-        Session session = sessionFactory.openSession();
 
-        Billetera billetera = session.get(Billetera.class, billeteraId);
-
-        session.close();
-
-        return billetera;
-    }
 
     protected Billetera readByDNI(String dni) {
         Session session = sessionFactory.openSession();
