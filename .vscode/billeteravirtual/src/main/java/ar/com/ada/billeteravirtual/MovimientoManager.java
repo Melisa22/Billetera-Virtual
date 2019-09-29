@@ -1,4 +1,4 @@
-package ar.com.ada.billeteravirtual.abmpersona;
+package ar.com.ada.billeteravirtual;
 
 import java.util.List;
 import java.util.logging.Level;
@@ -12,7 +12,7 @@ import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
 
-public class PersonaManager {
+public class MovimientoManager {
     protected SessionFactory sessionFactory;
 
     protected void setup() {
@@ -35,12 +35,12 @@ public class PersonaManager {
         sessionFactory.close();
     }
 
-    protected void create(Persona persona) {
+    protected void create(Movimiento movimiento) {
 
         Session session = sessionFactory.openSession();
         session.beginTransaction();
 
-        session.save(persona);
+        session.save(movimiento);
   
         session.getTransaction().commit();
         session.close();
@@ -66,29 +66,28 @@ public class PersonaManager {
         return persona;
     }
 
-    protected void update(Persona persona) {
+    protected void update(Movimiento movimiento) {
 
         Session session = sessionFactory.openSession();
         session.beginTransaction();
 
-        session.update(persona);
+        session.update(movimiento);
 
         session.getTransaction().commit();
         session.close();
     }
 
-    protected void delete(Persona persona) {
+    protected void delete(Movimiento movimiento) {
 
         Session session = sessionFactory.openSession();
         session.beginTransaction();
 
-        session.delete(persona);
+        session.delete(movimiento);
 
         session.getTransaction().commit();
         session.close();
-    }
-
-
+     }
+        
     /**
      * Este metodo en la vida real no debe existir ya qeu puede haber miles de usuarios
      * @return
@@ -104,8 +103,6 @@ public class PersonaManager {
         List<Persona> todas = query.getResultList();
 
         return todas;
-
-        
 
     }
 
@@ -128,8 +125,8 @@ public class PersonaManager {
 
         return personas;
 
-        
+    }
 
     }
 
-}
+

@@ -1,9 +1,9 @@
-package ar.com.ada.billeteravirtual.abmpersona;
+package ar.com.ada.billeteravirtual;
 
-//import java.util.List;
+import java.util.List;
 import java.util.logging.Level;
 
-//import javax.persistence.Query;
+import javax.persistence.Query;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -12,7 +12,7 @@ import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
 
-public class UsuarioManager {
+public class BilleteraManager {
     protected SessionFactory sessionFactory;
 
     protected void setup() {
@@ -35,75 +35,57 @@ public class UsuarioManager {
         sessionFactory.close();
     }
 
-    protected void create(Usuario usuario) {
+    protected void create(Billetera billetera) {
 
         Session session = sessionFactory.openSession();
         session.beginTransaction();
 
-        session.save(usuario);
+        session.save(billetera);
   
         session.getTransaction().commit();
         session.close();
     }
 
-    public Usuario read(int usuarioId) {
+
+
+    protected Billetera readByDNI(String dni) {
         Session session = sessionFactory.openSession();
 
-        Usuario usuario = session.get(Usuario.class, usuarioId);
+        Billetera billetera = session.get(Billetera.class, dni);
 
         session.close();
 
-        return usuario;
+        return billetera;
     }
 
-    public Usuario read(String userName){
-        Session session = sessionFactory.openSession();
-
-        Usuario usuario = session.get(Usuario.class, userName);
-
-        session.close();
-
-        return usuario;
-    }
-/*
-    protected Usuario readByDNI(String dni) {
-        Session session = sessionFactory.openSession();
-
-        Persona persona = session.get(Persona.class, dni);
-
-        session.close();
-
-        return persona;
-    }*/
-
-    protected void update(Usuario usuarioEncontrado) {
+    protected void update(Billetera billetera) {
 
         Session session = sessionFactory.openSession();
         session.beginTransaction();
 
-        session.update(usuarioEncontrado);
+        session.update(billetera);
 
         session.getTransaction().commit();
         session.close();
     }
 
-    /*protected void delete(Persona persona) {
+    protected void delete(Billetera billetera) {
 
         Session session = sessionFactory.openSession();
         session.beginTransaction();
 
-        session.delete(persona);
+        session.delete(billetera);
 
         session.getTransaction().commit();
         session.close();
     }
 
-
+    
     /**
      * Este metodo en la vida real no debe existir ya qeu puede haber miles de usuarios
      * @return
      */
-    /*public List<Persona> buscarTodas() {
+    public List<Persona> buscarTodas() {
 
         Session session = sessionFactory.openSession();
 
@@ -115,8 +97,6 @@ public class UsuarioManager {
 
         return todas;
 
-        
-
     }
 
     /**
@@ -125,7 +105,7 @@ public class UsuarioManager {
      * @param nombre
      * @return
      */
-    /*public List<Persona> buscarPor(String nombre) {
+    public List<Persona> buscarPor(String nombre) {
 
         Session session = sessionFactory.openSession();
 
@@ -138,8 +118,7 @@ public class UsuarioManager {
 
         return personas;
 
-        
+          }
+    }
 
-    }*/
 
-}

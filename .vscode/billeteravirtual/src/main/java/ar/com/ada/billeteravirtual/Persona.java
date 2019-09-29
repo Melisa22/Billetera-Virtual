@@ -1,8 +1,8 @@
-package ar.com.ada.billeteravirtual.abmpersona;
+package ar.com.ada.billeteravirtual;
 
 import javax.persistence.*;
 
-/**
+/** 
  * Persona
  */
 @Entity
@@ -12,11 +12,17 @@ public class Persona {
     @Id
     @Column(name = "persona_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int pesonaId;
+    private int personaId;
     private String nombre;
     private String dni;
     private int edad;
     private String email;
+
+    @OneToOne(mappedBy = "persona", cascade = CascadeType.ALL)
+    private Usuario usuario;
+
+    @OneToOne(mappedBy = "persona", cascade = CascadeType.ALL)
+    private Billetera billetera;
 
     public Persona(String nombre, String dni, int edad, String email) {
         this.nombre = nombre;
@@ -28,12 +34,12 @@ public class Persona {
     public Persona() {
     }
 
-    public int getPesonaId() {
-        return pesonaId;
+    public int getPersonaId() {
+        return personaId;
     }
 
-    public void setPesonaId(int pesonaId) {
-        this.pesonaId = pesonaId;
+    public void setPersonaId(int personaId) {
+        this.personaId = personaId;
     }
 
     public String getNombre() {
@@ -56,7 +62,10 @@ public class Persona {
         return edad;
     }
 
-    public void setEdad(int edad) {
+    public void setEdad(int edad) throws Exception {
+        if (edad < 18) {
+         throw new Exception();
+        }
         this.edad = edad;
     }
 
@@ -71,6 +80,29 @@ public class Persona {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+        /**
+     * @param usuario the usuario to set
+     */
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+        this.usuario.setPersona(this); //Vinculamos ambos objetos entre si
+    }
+    /**
+     * @return the usuario
+     */
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public Billetera getBilletera(){
+        return billetera;
+    }
+
+    public void setBilletera(Billetera billetera) {
+        this.billetera = billetera;
+        
     }
 
 }
